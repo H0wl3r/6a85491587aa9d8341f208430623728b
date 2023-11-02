@@ -3,9 +3,8 @@ Steps to install Sysmon via GPO.
 ** IMPORTANT **  
 :: 1) Create a Sysmon folder with the SYSVOL share on your domain controller  (utalise fsmgmt.msc on DC)  
 :: 2) place sysmon64.exe, sysmonConfig.xml and sysmon_install.bat in newly created Sysmon folder  
-:: 5) Create a GPO that will launch this batch file on startup.  
-:: 6) Apply the GPO to your specified OUs.   
-
+:: 3) Create a GPO that will launch this batch file on startup.  
+:: 3) Apply the GPO to your specified OUs.   
 
 ----- 1 - Software Distribution Point-----  
 Login to the DC and create a folder at “C:\Software_Distribution_Point“. Right-click the “C:\Software_Distribution_Point” folder and create a new share.  
