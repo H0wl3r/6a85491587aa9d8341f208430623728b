@@ -1,13 +1,13 @@
 Steps to install Sysmon via GPO.
 
 ** IMPORTANT **  
-:: 1) Create a Sysmon folder with the SYSVOL share on your domain controller  (utalise fsmgmt.msc on DC)
-:: 2) Download Sysmon from Microsoft and place both sysmon.exe and sysmon64.exe in newly created Sysmon folder  
-:: 3) Download a sample sysmon config from SwiftOnSecurity, rename the file to sysmonConfig.xml and place it within the Sysmon folder  
-:: 4) Enter the appropriate values for your DC and FQDN below.  
+:: 1) Create a Sysmon folder with the SYSVOL share on your domain controller  (utalise fsmgmt.msc on DC)  
+:: 2) place sysmon64.exe, sysmonConfig.xml and sysmon_install.bat in newly created Sysmon folder  
 :: 5) Create a GPO that will launch this batch file on startup.  
 :: 6) Apply the GPO to your specified OUs.   
 
+
+----- 1 - Software Distribution Point-----  
 Login to the DC and create a folder at “C:\Software_Distribution_Point“. Right-click the “C:\Software_Distribution_Point” folder and create a new share.
 “Sharing” tab “Advanced Sharing“.
 “Share This Folder” box and name the share “sdp$“. The “$” at the end will hide the share. Fill in the comment so others know what this share is for.
@@ -20,4 +20,17 @@ Right-click the “C:\Software_Distribution_Point” folder and create the Secur
 Now remove any other user’s accounts listed, then add “Domain Users“, and “Domain Computer” with ONLY “Read” permission. Then add “Domain Admins” with “Full Control” permissions.
 Click “OK“
 Click “Close“
+
+
+----- 3 - Create a Deployment Group Policy -----
+Login to your Domain Controler, open Group Policy editor, create a new Group Policy Object(GPO), and name it “Sysmon_Deployment“.
+Find the new GPO, right-click on it and click “Edit“.
+navigate to the following “Computer Configuration –> Policies –> Windows Settings –> Scripts (Startup/Shutdown)“
+Right-click on “Startup” and click on “Properties“.
+In the “Startup Properties” windows, click “Add“.
+In the “Edit Script” windows click “Browse…“
+In the popup explorer window, navigate to the SDP share; Select the Sysmon install Batch script we made earlier.
+Click “Open“ we don’t need to add any script parameters, so click “Ok”.
+Click “Ok” to complete the changes to the Startup script settings.
+
 
